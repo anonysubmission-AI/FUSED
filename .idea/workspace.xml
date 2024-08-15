@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="47c2d044-bdac-4c55-92de-91ce42921600" name="更改" comment="初始提交">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_utils/ada_hessain.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algs/fl_base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/algs/fused.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/CNN_Cifar10.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/CNN_Cifar100.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/LeNet_FashionMNIST.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Model_adults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Model_base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/Model_purchase.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/TextCNN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,9 +37,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="PerforceDirect.Settings">
-    <option name="CHARSET" value="无" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -153,7 +140,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Remote Python 3.8.18 (sftp://root@ssh.openbayes.com:32109/usr/local/bin/python3)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/results" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -305,8 +291,18 @@
       <workItem from="1722218828294" duration="33708000" />
       <workItem from="1722578786643" duration="7828000" />
       <workItem from="1722589978901" duration="217000" />
-      <workItem from="1722590265716" duration="908000" />
+      <workItem from="1722590265716" duration="5417000" />
+      <workItem from="1723729439798" duration="411000" />
     </task>
+    <task id="LOCAL-00001" summary="初始提交">
+      <option name="closed" value="true" />
+      <created>1722597823006</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722597823006</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

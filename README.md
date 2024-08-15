@@ -1,6 +1,6 @@
-# Forgetting Is Not Always Catastrophic: Federated Unlearning via Selective Sparse Adapter
+# Unlearning through Knowledge Overwriting: Reversible Federated Unlearning via Selective Sparse Adapter
 Welcome to the repository! This is the detailed implementation of our project, FUSED. We hope this code will serve as a valuable resource for understanding our work and its application. Thank you for your interest and support!
-![img.png](img.png)
+![img_1.png](img_1.png)
 ## Dependencies
 ```
 torch==2.2.1+cu121
@@ -12,14 +12,17 @@ torchvision==0.17.0+cu121
 joblib==1.3.2
 ```
 ## Datasets
+### Image Datasets
 -[Cifar10](https://www.cs.toronto.edu/~kriz/cifar.html)  
 -[Cifar100](https://www.cs.toronto.edu/~kriz/cifar.html)  
--[FashionMNIST](https://www.worldlink.com.cn/en/osdir/fashion-mnist.html)  
+-[FashionMNIST](https://www.worldlink.com.cn/en/osdir/fashion-mnist.html) 
+### Numerical Datasets
 -[Adult](https://archive.ics.uci.edu/ml/datasets/Adult)
+### Text Datasets
+-[THUCNews](http://thuctc.thunlp.org/)
 
 ## Start
 ```angular2html
 python main.py --data_name='fashionmnist' --python main.py --data_name='fashionmnist' --forget_paradigm='client' --paradigm='fused'  --global_epoch=100 --local_epoch=5 --alpha=1.0
 ```
-
 

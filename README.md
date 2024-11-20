@@ -10,19 +10,16 @@ objgraph==3.6.1
 pandas==2.0.2
 torchvision==0.17.0+cu121
 joblib==1.3.2
+transformers==4.37.2
 ```
 ## Datasets
 ### Image Datasets
 -[Cifar10](https://www.cs.toronto.edu/~kriz/cifar.html)  
 -[Cifar100](https://www.cs.toronto.edu/~kriz/cifar.html)  
--[FashionMNIST](https://www.worldlink.com.cn/en/osdir/fashion-mnist.html) 
-### Numerical Datasets
--[Adult](https://archive.ics.uci.edu/ml/datasets/Adult)
-### Text Datasets
--[THUCNews](http://thuctc.thunlp.org/)
+-[FashionMNIST](https://www.worldlink.com.cn/en/osdir/fashion-mnist.html)
 
-## Start
+## Quick start
 ```angular2html
-python main.py --data_name='fashionmnist' --python main.py --data_name='fashionmnist' --forget_paradigm='client' --paradigm='fused'  --global_epoch=100 --local_epoch=5 --alpha=1.0
+python main.py --data_name='fashionmnist' --forget_paradigm='client' --paradigm='fused'  --global_epoch=100 --local_epoch=5 --alpha=1.0
 ```
 

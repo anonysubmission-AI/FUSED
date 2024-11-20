@@ -5,6 +5,7 @@ import torch.nn.functional as F
 import numpy as np
 from models.Model_base import MyModel
 import torchvision
+import timm
 
 class ResidualBlock(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1):
@@ -78,3 +79,17 @@ class Model(MyModel):
 
     def forward(self, x):
         return self.model(x)
+
+# class Model(MyModel):
+#     def __init__(self, config):
+#         super(Model, self).__init__()
+#         self.num_classes = config.num_classes
+#         self.model = timm.create_model('vit_small_patch16_224', pretrained=True)
+#         # self.model = ViTForImageClassification.from_pretrained('google/vit-small-patch16-224-in21k', num_labels=self.num_classes)
+        
+#         # processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224")
+#         # self.model = AutoModelForImageClassification.from_pretrained("google/vit-base-patch16-224")
+#         self.model.head = nn.Linear(self.model.head.in_features, self.num_classes)
+
+#     def forward(self, x):
+#         return self.model(x)

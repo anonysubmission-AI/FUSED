@@ -7,7 +7,9 @@ import numpy as np
 from functools import reduce
 import torchvision
 from peft import LoraConfig, get_peft_model
-from utils import *
+import timm
+
+# from utils import *
 class MyModel(nn.Module):
     def __init__(self):
         super(MyModel, self).__init__()
@@ -18,26 +20,57 @@ class MyModel(nn.Module):
             return ''.join(name.split('.')[:-1])
         return name
 
+    def save_params(self):
+        for param_name, param in self.named_parameters():
+            if 'alpha' in param_name or 'beta' in param_name:
+                continue
+            _buff_param_name = param_name.replace('.', '__')
+            self.register_buffer(_buff_param_name, param.data.clone())
 
-class Fused(nn.Module):
+    def compute_diff(self):
+        diff_mean = dict()
+        for param_name, param in self.named_parameters():
+            layer_name = self.split_weight_name(param_name)
+            _buff_param_name = param_name.replace('.', '__')
+            old_param = getattr(self, _buff_param_name, default=0.0)
+            diff = (param - old_param) ** 2
+            diff = diff.sum()
+            total_num = reduce(lambda x, y: x*y, param.shape)
+            diff /= total_num
+            diff_mean[layer_name] = diff
+        return diff_mean
+
+    def remove_grad(self, name=''):
+        for param_name, param in self.named_parameters():
+            if name in param_name:
+                param.requires_grad = False
+
+
+class Lora(nn.Module):
     def __init__(self, args, global_model):
-        super(Fused, self).__init__()
+        super(Lora, self).__init__()
         if args.data_name == 'cifar10':
-            # global_model = torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)
-            # num_ftrs = global_model.fc.in_features
-            # global_model.fc = nn.Linear(num_ftrs, args.num_classes)
-
             global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
-            # target_modules = ["layer1.0.conv1", "layer2.0.conv1", "layer3.0.conv1", "layer4.0.conv1"]
             target_modules = ["layer4.0.conv2", "layer4.1.conv1", "layer4.1.conv2", "fc"]
-        elif args.data_name == 'cifar100':
-            global_model = torchvision.models.resnet18(pretrained=True)
-            num_ftrs = global_model.fc.in_features
-            global_model.fc = nn.Linear(num_ftrs, args.num_classes)
-            # global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
 
-            # target_modules = ["layer1.0.conv1", "layer2.0.conv1", "layer3.0.conv1", "layer4.0.conv1"]
+#             target_modules = [
+#     "to_patch_embedding.1",  # nn.Linear in to_patch_embedding
+#     "transformer.layers.0.0.to_qkv",  # Attention layer's to_qkv in the first transformer block
+#     "transformer.layers.0.0.to_out",  # Attention layer's to_out in the first transformer block
+#     "transformer.layers.0.1.net.1",  # First Linear layer in FeedForward in the first transformer block
+#     "transformer.layers.0.1.net.3",  # Second Linear layer in FeedForward in the first transformer block
+#     "transformer.layers.1.0.to_qkv",  # Attention layer's to_qkv in the second transformer block
+#     "transformer.layers.1.0.to_out",  # Attention layer's to_out in the second transformer block
+#     "transformer.layers.1.1.net.1",  # First Linear layer in FeedForward in the second transformer block
+#     "transformer.layers.1.1.net.3",  # Second Linear layer in FeedForward in the second transformer block
+#     # Add more layers as needed for deeper transformer blocks
+#     "linear_head.1"  # nn.Linear in linear_head
+# ]
+
+        elif args.data_name == 'cifar100':
+            global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
             target_modules = ["layer4.0.conv2", "layer4.1.conv1", "layer4.1.conv2", "fc"]
+           
         elif args.data_name == 'fashionmnist':
             global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
 
@@ -45,6 +78,9 @@ class Fused(nn.Module):
         elif args.data_name == 'adult':
             global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
             target_modules = ['fc3']
+        elif args.data_name == 'text':
+            global_model.load_state_dict(torch.load('save_model/global_model_{}.pth'.format(args.data_name)))
+            target_modules = ["encoder.layer.11.output.dense"]
 
         config = LoraConfig(
         r = 16,
